@@ -16,13 +16,13 @@
     <div>
       {{list_of_chars}}
     </div>
-    {% if show_render_button and show_download_button %}
+    {% if show_render_button %}
       <form action="/fonts/{{filename}}/write" method="post">
         <input type="text" name="font_name" placeholder="フォントの名称" class="border-2 rounded px-2 py-1">
         <input type="number" name="font_weight" placeholder="フォントのウェイト" class="border-2 rounded px-2 py-1">
         <input type="submit" value="フォントを分割済みWoffファイルに変換する作業を始めます" class="bg-blue-300 hover:bg-blue-400 rounded border-2 px-2 py-1">
       </form>
-      {% else %}
+    {% else %}
     {% if show_download_button %}
       <a href="/fonts/{{filename}}/download" class="bg-blue-300 hover:bg-blue-400 rounded border-2 px-2 py-1">サブセットをダウンロードする</a>
     {% else %}

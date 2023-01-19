@@ -71,12 +71,13 @@ def writeFonts(filename):
     def make_subset():
         for i, chars in enumerate(list_of_chars):
             subsettor(os.path.join(app.config['UPLOAD_FOLDER'], filename), "".join(chars), str(os.path.join(app.config['UPLOAD_FOLDER'], filename.rsplit('.', 1)[0].lower()+ "/" + filename.rsplit('.', 1)[0].lower() + '-' + str(i) + '.woff2')))
-        with open(os.path.join(app.config['UPLOAD_FOLDER'], filename.rsplit('.', 1)[0].lower() + "/" + filename.rsplit('.', 1)[0].lower() + '.css'), 'w') as f:
+        with open(os.path.join(app.config['UPLOAD_FOLDER'], filename.rsplit('.', 1)[0].lower()+ "/" + font_name +'.css'), 'w') as f:
             for i, chars in enumerate(list_of_chars):
                 f.write("@font-face {\n")
                 f.write("font-family: '" + font_name + "';\n")
                 f.write("font-weight: " + font_weight + ";\n")
                 f.write("src: url('" + filename.rsplit('.', 1)[0].lower() + '-' + str(i) + ".woff2') format('woff2');\n")
+                f.write("unicode-range: " + ",".join([f'U+{hex(ord(c))[2:]}' for c in chars]) + ";\n")
                 f.write("}\n")
         make_archive(os.path.join(app.config['UPLOAD_FOLDER'], filename.rsplit('.', 1)[0].lower()), 'zip', os.path.join(app.config['UPLOAD_FOLDER'], filename.rsplit('.', 1)[0].lower()))
         rmtree(os.path.join(app.config['UPLOAD_FOLDER'], filename.rsplit('.', 1)[0].lower()))
