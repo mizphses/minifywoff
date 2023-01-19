@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="p-2">
+  {% if error %}
+  <div class="p-4 bg-red-100">
+    {{ error }}
+  </div>
+  {% endif %}
+  <h2 class="text-xl font-bold">フォントを投稿する</h2>
+  <form action="/postfont" method="post" enctype="multipart/form-data">
+    <div>
+      <label for="file">フォントファイルを選択</label>
+      <input type="file" name="file" id="file">
+    </div>
+    <div>
+      <input type="submit" value="投稿" class="bg-blue-300 hover:bg-blue-400 rounded border-2 px-2 py-1">
+    </div>
+</div>
+{% endblock %}
