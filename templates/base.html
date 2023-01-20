@@ -1,12 +1,57 @@
 <!doctype html>
-<title>{% block title %}{% endblock %} - MinifyWoff</title>
-<script src="https://cdn.tailwindcss.com"></script>
-<div class="p-2 flex flex-flow justify-between items-center bg-green-100">
-  <h1 class="text-xl">MinifyWoff</h1>
-  <div>
-    <a href="/">Login</a>
-  </div>
-</div>
-<section class="content">
-  {% block content %}{% endblock %}
-</section>
+<html>
+  <head>
+    <title>{% block title %}{% endblock %} - MinifyWoff</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['system-ui', '-apple-system', 'Noto Sans JP', 'sans-serif'],
+            }
+          }
+        }
+      }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&family=Noto+Serif+JP:wght@400;700;900&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+  <body>
+    <div class="py-10 px-4 sm:px-8 md:px-10 lg:px-20 flex flex-flow justify-between items-center border-b-2 bg-white w-full fixed z-50">
+      <h1 class="text-xl select-none">
+        <a href="{{url_for('index')}}">
+          <img src="{{url_for('static', filename='logo.svg')}}" width="170">
+        </a>
+      </h1>
+      <div>
+        <a href="{{url_for('login')}}" class="border-2 border-yellow-600 hover:border-yellow-700 bg-yellow-600 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded">ログイン</a>
+      </div>
+    </div>
+    <div class="py-10 px-4 sm:px-8 md:px-10 lg:px-20 flex flex-flow justify-between items-center border-b-2 select-none opacity-0">
+      <h1 class="text-xl">
+        <a href="{{url_for('index')}}">
+          <img src="{{url_for('static', filename='logo.svg')}}" width="170">
+        </a>
+      </h1>
+    </div>
+    <section class="content">
+      {% block content %}{% endblock %}
+    </section>
+    <div class="footer bg-gray-100 p-20">
+      <div class="flex flex-col">
+        <a href="{{url_for('index')}}">
+          <img src="{{url_for('static', filename='logo.svg')}}" width="170">
+        </a>
+        <div class="py-5 flex flex-col">
+          <a href="{{url_for('index')}}" class="flex">ホーム</a>
+          <a href="{{url_for('login')}}" class="flex">ログイン</a>
+          <a href="//mizphses.com" class="flex">開発者ホームページ</a>
+        </div>
+      </div>
+      <p>©2023 mizphses All rights reserved. 書体はデザイナのライセンスに準拠します。</p>
+    </div>
+</body>
+</html>

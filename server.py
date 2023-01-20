@@ -91,5 +91,20 @@ def writeFonts(filename):
 def downloadFiles(filename):
     return send_from_directory(app.config['UPLOAD_FOLDER'], filename.rsplit('.', 1)[0].lower() + ".zip", as_attachment=True)
 
+
+# Account
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        if username == app.config['USERNAME'] and password == app.config['PASSWORD']:
+            session['logged_in'] = True
+            flash('You were logged in')
+            return redirect(url_for('index'))
+        else:
+            flash('Invalid username or password')
+    return render_template('login.html')
 if __name__ == '__main__':
     app.run(debug=True, port=5001)

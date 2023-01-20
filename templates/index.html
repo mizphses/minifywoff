@@ -1,7 +1,77 @@
+
 {% extends 'base.html' %}
 
+{% block title %}ようこそ{% endblock %}
+
 {% block content %}
-<div>
-  <h2>Use webfonts lightly with MinifyWoff</h2>
+<div class="px-4 sm:px-8 md:px-10 lg:px-20 py-20 flex flex-col justify-center items-start gap-4 sm:flex-row sm:items-center sm:justify-between text-gray-700">
+  <div class="flex flex-col gap-2">
+    <h2 class="message text-4xl md:text-5xl">
+      フォント<span class="small">は</span>小さく、
+      <br />
+      デザイン<span class="small">は</span>幅広く。
+    </h2>
+    <p class="font-feature-settings-palt text-xl sm:max-w-sm">
+      日本語フォントをはじめとする容量の大きな書体の配信に特化したフォント変換・配信サービスです。
+    </p>
+    <div class="flex flex-row gap-4 select-none">
+      <a href="{{url_for('postfont')}}" class="border-2 border-yellow-600 hover:border-yellow-700 bg-yellow-600 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded">無料ではじめる</a>
+      <a href="{{url_for('login')}}" class="border-2 border-yellow-600 hover:border-yellow-700 hover:bg-gray-100 font-bold py-2 px-4 rounded">ログイン</a>
+    </div>
+  </div>
+  <div>
+    <img src="{{url_for('static', filename='illust.svg')}}" alt="hero" class="text-center w-60 p-10" />
+  </div>
 </div>
+
+<div class="pt-10 px-4 sm:px-8 md:px-10 lg:px-20 text-gray-700 flex flex-col gap-2">
+  <div class="border-2 p-4  bg-yellow-50">
+  <h2 class="text-2xl font-bold">
+    Closed Beta Release
+  </h2>
+  <div class="font-feature-settings-palt">
+    <p>これはクローズドベータです。</p>
+    <p>配信機能についてはまだ実装がなされていません。WEBフォントに変換する機能のみを提供しています。</p>
+  </div>
+  </div>
+</div>
+
+<div class="pt-10 px-4 sm:px-8 md:px-10 lg:px-20 text-gray-700 flex flex-col gap-2">
+  <h2 class="text-2xl font-bold">
+    大きすぎる日本語フォントを最適化
+  </h2>
+  <div class="font-feature-settings-palt">
+    <p>日本語フォントはヨーロッパ言語のフォントの数十倍の容量を必要とします。</p>
+    <p>ヨーロッパ言語と同じパフォーマンスで配信するには工夫が必要です。</p>
+    <p>TypeShrinkではCSSで定義されたフォントを分割し配信できる仕組みを応用し, フォントを物理的に200文字ずつ分割して配信する元素材を作成しています。</p>
+  </div>
+</div>
+
+<div class="py-10 px-4 sm:px-8 md:px-10 lg:px-20 text-gray-700 flex flex-col gap-2">
+  <h2 class="text-2xl font-bold">
+    ダイナミックサブセッティングはない、静的な配信
+  </h2>
+  <div class="font-feature-settings-palt">
+    <p>CJK言語のフォント配信はJavaScriptによるダイナミックサブセッティングが定番です。しかしながら, JavaScriptによるダイナミックサブセッティングはJavaScriptライブラリとの相性問題が発生したり, アクセスのたびにサブセットされたフォントの作成するプロセスが必要になったりします。</p>
+    <p>TypeShrinkの基本思想は静的な書体ホスティングです。 サーバー側ではあらかじめサブセットされた書体群を一定の文字範囲ごと（概ね200文字）につき用意しています。</p>
+    <p>これにより, 高速な配信, 軽量なフォントの読み込み, CSSの適用だけのシンプルな設定を実現できます。</p>
+  </div>
+</div>
+
+<style>
+  .message{
+    font-family: 'Noto sans JP', serif;
+    font-weight: 900;
+    line-height: 1.2;
+    letter-spacing: 0;
+    color: #000;
+    font-feature-settings: "palt";
+  }
+  .message .small {
+    font-size: 0.8em;
+  }
+  .font-feature-settings-palt{
+    font-feature-settings: "palt";
+  }
+</style>
 {% endblock %}

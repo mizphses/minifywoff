@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}ログイン{% endblock %}
+
+{% block content %}
+<div class="min-h-screen">
+  <div class="p-10 md:p-20">
+    {% if error %}
+    <div class="p-4 bg-red-100">
+      {{ error }}
+    </div>
+    {% endif %}
+    <h2 class="text-xl font-bold p-4 mt-2 bg-yellow-600 text-white rounded">ログイン</h2>
+    <form action="/login" method="post">
+      <div class="my-10">
+        <label for="username" class="block">ユーザー名</label>
+        <input type="text" name="username" id="username" class="border-2 border-gray-300 rounded px-2 py-1" required>
+      </div>
+      <div class="my-10">
+        <label for="password" class="block">パスワード</label>
+        <input type="password" name="password" id="password" class="border-2 border-gray-300 rounded px-2 py-1" required>
+      </div>
+      <div>
+        <input type="submit" value="ログイン" class="rounded px-6 py-2 bg-blue-700 hover:bg-blue-800 text-white">
+      </div>
+  </div>
+</div>
+{% endblock %}

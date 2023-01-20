@@ -1,20 +1,50 @@
 {% extends 'base.html' %}
 
+{% block title %}フォントの投稿{% endblock %}
+
 {% block content %}
-<div class="p-2">
-  {% if error %}
-  <div class="p-4 bg-red-100">
-    {{ error }}
+<div class="min-h-screen">
+  <div class="p-20">
+    {% if error %}
+    <div class="p-4 bg-red-100">
+      {{ error }}
+    </div>
+    {% endif %}
+    <h2 class="text-xl font-bold p-2 mt-2 bg-green-700 text-white rounded">[STEP 1] フォントを投稿する</h2>
+    <div class="border-2 border-green-700 rounded p-2 my-2">
+      <h2 class="text-xl font-bold">注意事項</h2>
+      <p>投稿するフォントはあなたが作成したものであるか, WEBフォントとして配信するライセンスを有するものにしてください。</p>
+      <p>例えば, LETSやMORISAWA PASSPORTの標準的なプランではあなたがWEBフォントとして配信するライセンスを付与するものではありません。</p>
+      <p>また, フリーフォントであっても一部のフォントはWEBフォント化が認められていません。SIL OFLやApache2 License, IPAフォントライセンス, M+フォントライセンスなどではない場合はよく利用規約をお読みください。</p>
+      <p>フォントのライセンス違反については, 開発者は責任を負いません。</p>
+      <p>YOU ARE REQUIRED TO COMPLY THE LICENSE OF FONT TO CREATE WEB-FONT FILE. THE DEVELOPER OF THIS SOFTWARE IS NOT RESPONSIBLE FOR ANY VIOLATION OF THE LICENSE.</p>
+    </div>
+    <div class="border-2 border-green-700 rounded p-2 my-2">
+      <p class="text-xl font-bold">フォントアップロードの手順</p>
+      <p>1. フォントがTTFまたはOTFファイルであることを確認してください。</p>
+      <p>2. 「クリックしてフォントファイルを選択」を選択し, フォントをアップロードしてください。</p>
+      <p>3. 投稿ボタンを忘れずにクリックしてください。</p>
+    </div>
+    <form action="/postfont" method="post" enctype="multipart/form-data">
+      <div class="my-10">
+        <label for="file" class="bg-red-700 hover:bg-red-800 px-4 py-2 text-white rounded">クリックしてフォントファイルを選択</label>
+        <input type="file" name="file" id="file" class="invisible" accept=".otf, .ttf" required>
+        <label id="filename">ファイル未選択</label>
+      </div>
+      <div>
+        <input type="submit" value="投稿" class="rounded px-6 py-2 bg-blue-700 hover:bg-blue-800 text-white">
+      </div>
+    </form>
   </div>
-  {% endif %}
-  <h2 class="text-xl font-bold">フォントを投稿する</h2>
-  <form action="/postfont" method="post" enctype="multipart/form-data">
-    <div>
-      <label for="file">フォントファイルを選択</label>
-      <input type="file" name="file" id="file">
-    </div>
-    <div>
-      <input type="submit" value="投稿" class="bg-blue-300 hover:bg-blue-400 rounded border-2 px-2 py-1">
-    </div>
 </div>
+
+<script>
+  // get filename and display to #filename
+  const file = document.getElementById('file');
+  const filename = document.getElementById('filename');
+  file.addEventListener('change', function() {
+    filename.textContent = file.files[0].name + "が選択されています";
+  });
+</script>
+
 {% endblock %}
