@@ -17,4 +17,5 @@ psycopg2==2.9.5
 python-dotenv==0.21.0
 SQLAlchemy==1.4.46
 uuid==1.30
+uWSGI==2.0.21
 Werkzeug==2.2.2
