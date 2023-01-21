@@ -14,10 +14,17 @@
     <p class="font-feature-settings-palt text-xl sm:max-w-sm">
       日本語フォントをはじめとする容量の大きな書体の配信に特化したフォント変換・配信サービスです。
     </p>
+
+    {% if current_user.is_authenticated %}
     <div class="flex flex-row gap-4 select-none">
-      <a href="{{url_for('postfont')}}" class="border-2 border-yellow-600 hover:border-yellow-700 bg-yellow-600 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded">無料ではじめる</a>
+      <a href="{{url_for('postfont')}}" class="border-2 border-yellow-600 hover:border-yellow-700 bg-yellow-600 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded">フォントを変換</a>
+    </div>
+    {% else %}
+    <div class="flex flex-row gap-4 select-none">
+      <a href="{{url_for('signup')}}" class="border-2 border-yellow-600 hover:border-yellow-700 bg-yellow-600 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded">無料ではじめる</a>
       <a href="{{url_for('login')}}" class="border-2 border-yellow-600 hover:border-yellow-700 hover:bg-gray-100 font-bold py-2 px-4 rounded">ログイン</a>
     </div>
+    {% endif %}
   </div>
   <div>
     <img src="{{url_for('static', filename='illust.svg')}}" alt="hero" class="text-center w-60 p-10" />

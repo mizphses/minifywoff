@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
   <head>
-    <title>{% block title %}{% endblock %} - MinifyWoff</title>
+    <title>{% block title %}{% endblock %} - TypeShrink</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
       tailwind.config = {
@@ -26,9 +26,17 @@
           <img src="{{url_for('static', filename='logo.svg')}}" width="170">
         </a>
       </h1>
+      {% if current_user.is_authenticated %}
       <div>
-        <a href="{{url_for('login')}}" class="border-2 border-yellow-600 hover:border-yellow-700 bg-yellow-600 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded">ログイン</a>
+        <a href="{{url_for('postfont')}}" class="border-2 border-yellow-600 hover:border-yellow-700 bg-yellow-600 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded">フォント投稿</a>
+        <a href="{{url_for('logout')}}" class="border-2 border-yellow-600 hover:bg-gray-100 text-gray-700 py-2 px-4 rounded">ログアウト</a>
       </div>
+      {% else %}
+      <div>
+        <a href="{{url_for('signup')}}" class="border-2 border-yellow-600 hover:border-yellow-700 bg-yellow-600 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded">アカウント作成</a>
+        <a href="{{url_for('login')}}" class="border-2 border-yellow-600 hover:bg-gray-100 text-gray-700 py-2 px-4 rounded">ログイン</a>
+      </div>
+      {% endif %}
     </div>
     <div class="py-10 px-4 sm:px-8 md:px-10 lg:px-20 flex flex-flow justify-between items-center border-b-2 select-none opacity-0">
       <h1 class="text-xl">

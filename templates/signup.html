@@ -1,8 +1,9 @@
 {% extends 'base.html' %}
 
-{% block title %}ログイン{% endblock %}
+{% block title %}利用者登録{% endblock %}
 
 {% block content %}
+
 <div class="min-h-screen">
   <div class="p-10 md:p-20">
     {% if error %}
@@ -10,8 +11,8 @@
       {{ error }}
     </div>
     {% endif %}
-    <h2 class="text-xl font-bold p-4 mt-2 bg-yellow-600 text-white rounded">ログイン</h2>
-    <form action="/login" method="post">
+    <h2 class="text-xl font-bold p-4 mt-2 bg-yellow-600 text-white rounded">アカウント作成</h2>
+    <form action="/signup" method="post">
       <div class="my-10">
         <label for="username" class="block">ユーザー名</label>
         <input type="text" name="username" id="username" class="border-2 border-gray-300 rounded px-2 py-1" required>
@@ -20,12 +21,14 @@
         <label for="password" class="block">パスワード</label>
         <input type="password" name="password" id="password" class="border-2 border-gray-300 rounded px-2 py-1" required>
       </div>
+      <div class="my-10">
+        <label for="email" class="block">メールアドレス</label>
+        <input type="email" name="email" id="email" class="border-2 border-gray-300 rounded px-2 py-1" required>
+      </div>
       <div>
-        <input type="submit" value="ログイン" class="rounded px-6 h-10 bg-blue-700 hover:bg-blue-800 text-white">
-        <p class="mt-10">
-          <a class="rounded px-6 py-3 border-2 border-yellow-800 hover:bg-gray-100" href="{{url_for('signup')}}">利用者登録</a>
-        </p>
+        <input type="submit" value="アカウント作成" class="rounded px-6 py-2 bg-blue-700 hover:bg-blue-800 text-white">
       </div>
   </div>
 </div>
+
 {% endblock %}
