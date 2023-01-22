@@ -4,6 +4,12 @@
 
 {% block content %}
 
+<!-- flash function -->
+{% if flash %}
+<div class="p-4 bg-green-100">
+  {{ flash }}
+</div>
+{% endif %}
 <div class="min-h-screen">
   <div class="p-10 md:p-20">
     {% if error %}
@@ -12,18 +18,36 @@
     </div>
     {% endif %}
     <h2 class="text-xl font-bold p-4 mt-2 bg-yellow-600 text-white rounded">アカウント作成</h2>
+    <!-- Terms of service -->
+    <div class="p-4 border-2 border-yellow-700 my-4">
+      <h2 class="text-2xl">サービスご利用規約</h2>
+      <p>この規約（以下「本規約」といいます）は、mizphses（以下「運営者」といいます）が提供するフォント変換プログラム「TypeShrink」の利用に関する条件を、本サービスを利用するお客様（以下「お客様」といいます）と運営者との間で定めるものです。</p>
+      <p class="text-xl">提供フォントの使用許諾</p>
+      <p>お客様は、営利目的・非営利目的を問わず本サービスにおいて提供されるフォント（以下「提供フォント」といいます）を利用することができます。なお、提供フォントに関する著作権を含む一切の権利は運営者に帰属するものとし、お客様は、本サービスを利用することにより、提供フォントに関し、本規約に別段の定めがある場合を除いて著作者人格権を含む一切の権利を主張しないことに同意したものとします。</p>
+      <p class="text-xl">提供フォントの利用</p>
+      <p>お客様が提供フォントをオンプレミスサーバで使用する際には、可能な限り運営者の名称を、変換済みファイルのzipファイルに同封されているCSSファイルの末尾に含まれる文章の通り表示することを要請します。</p>
+      <p class="text-xl">アップロードされたフォントについて</p>
+      <p>お客様のアップロードしたフォントおよび変換済みファイルは一時的または永続的にTypeShrinkのシステム上に複製されることに同意したものとします。</p>
+      <p class="text-xl">禁止事項</p>
+      <p>複製、公衆送信、WEBフォントへの変換およびWEBフォントの配信許諾を得ていないフォントを変換し、もしくは配信すること。</p>
+      <p>本サービスを公序良俗に反する目的で利用すること。</p>
+      <p>その他運営者が不適切と定めること</p>
+      <p class="text-xl">免責事項</p>
+      <p>運営者は、本サービスに起因してお客様に生じるいかなる損害についても一切の責任を負いません。</p>
+      <p>2023年1月22日</p>
+    </div>
     <form action="/signup" method="post">
       <div class="my-10">
         <label for="username" class="block">ユーザー名</label>
-        <input type="text" name="username" id="username" class="border-2 border-gray-300 rounded px-2 py-1" required>
+        <input type="text" name="username" id="username" class="border-2 border-gray-300 rounded px-2 py-1 border-2 rounded px-2 py-1 w-full md:w-1/2" required>
       </div>
       <div class="my-10">
         <label for="password" class="block">パスワード</label>
-        <input type="password" name="password" id="password" class="border-2 border-gray-300 rounded px-2 py-1" required>
+        <input type="password" name="password" id="password" class="border-2 border-gray-300 rounded px-2 py-1 border-2 rounded px-2 py-1 w-full md:w-1/2" required>
       </div>
       <div class="my-10">
         <label for="email" class="block">メールアドレス</label>
-        <input type="email" name="email" id="email" class="border-2 border-gray-300 rounded px-2 py-1" required>
+        <input type="email" name="email" id="email" class="border-2 border-gray-300 rounded px-2 py-1 border-2 rounded px-2 py-1 w-full md:w-1/2" required>
       </div>
       <div>
         <input type="submit" value="アカウント作成" class="rounded px-6 py-2 bg-blue-700 hover:bg-blue-800 text-white">

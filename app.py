@@ -132,8 +132,8 @@ def getFonts(filename):
 def writeFonts(filename):
     font_name = request.form['font_name']
     font_weight = request.form['font_weight']
-    db.session.add(Font(filename=filename, font_name=font_name, font_weight=font_weight, user_id=current_user.username))
-    db.session.commit()
+    user_email = current_user.email
+    user_id = current_user.username
     with open(os.path.join(app.config['UPLOAD_FOLDER'], filename), "rb") as f:
         font = TTFont(f)
         base_chars = character_list(font)
@@ -141,7 +141,7 @@ def writeFonts(filename):
     os.mkdir(os.path.join(app.config['UPLOAD_FOLDER'], filename.rsplit('.', 1)[0].lower()))
     def make_subset():
         for i, chars in enumerate(list_of_chars):
-            subsettor(os.path.join(app.config['UPLOAD_FOLDER'], filename), "".join(chars), str(os.path.join(app.config['UPLOAD_FOLDER'], filename.rsplit('.', 1)[0].lower()+ "/" + filename.rsplit('.', 1)[0].lower() + '-' + str(i) + '.woff2')))
+            subsettor(os.path.join(app.config['UPLOAD_FOLDER'], filename), "".join(chars), str(os.path.join(app.config['UPLOAD_FOLDER'], filename.rsplit('.', 1)[0].lower()+ "/" + filename.rsplit('.', 1)[0].lower() + font_weight + '-' + str(i) + '.woff2')))
         with open(os.path.join(app.config['UPLOAD_FOLDER'], filename.rsplit('.', 1)[0].lower()+ "/" + font_name +'.css'), 'w') as f:
             for i, chars in enumerate(list_of_chars):
                 f.write("@font-face {\n")
@@ -157,7 +157,14 @@ def writeFonts(filename):
         make_archive(os.path.join(app.config['UPLOAD_FOLDER'], filename.rsplit('.', 1)[0].lower()), 'zip', os.path.join(app.config['UPLOAD_FOLDER'], filename.rsplit('.', 1)[0].lower()))
         os.remove(os.path.join(app.config['UPLOAD_FOLDER'], filename))
         rmtree(os.path.join(app.config['UPLOAD_FOLDER'], filename.rsplit('.', 1)[0].lower()))
-        # write to database
+        #send email
+        with app.app_context():
+            msg = Message('TypeShrinkからのお知らせ', sender=f'TypeShrink<{app.config["MAIL_USERNAME"]}>', recipients=[user_email])
+            msg.body = 'TypeShrinkで生成されたフォントがダウンロードできます。'
+            msg.html = render_template('email_gen.html', font_name=font_name, filename=filename)
+            mail.send(msg)
+            db.session.add(Font(filename=filename, font_name=font_name, font_weight=font_weight, user_id=user_id))
+            db.session.commit()
     t = Thread(target=make_subset)
     t.start()
     return redirect(url_for('getFonts', filename=filename))
@@ -207,6 +214,13 @@ def signup():
         db.session.add(user)
         db.session.commit()
         flash('Thanks for registering')
+        # when registered, send email
+        msg = Message('TypeShrinkへの登録完了のご案内',
+                        sender='TypeShrink <' + app.config['MAIL_USERNAME'] + '>',
+                        recipients=[email])
+        msg.body = f'''ご登録ありがとうございました。あなたのログインIDは{username}です。'''
+        msg.html = render_template('email_reg.html', username=username)
+        mail.send(msg)
         return redirect(url_for('login'))
     return render_template('signup.html')
 

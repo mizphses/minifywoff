@@ -31,6 +31,15 @@
     <meta property="og:title" content="TypeShrink">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://typeshr.ink/">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VHKRZPC57V"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-VHKRZPC57V');
+    </script>
   </head>
   <body>
     <div class="py-10 px-4 sm:px-8 md:px-10 lg:px-20 flex flex-flow justify-between items-center border-b-2 bg-white w-full fixed z-50">
@@ -69,7 +78,7 @@
         <div class="py-5 flex flex-col">
           <a href="{{url_for('index')}}" class="flex">ホーム</a>
           <a href="{{url_for('login')}}" class="flex">ログイン</a>
-          <a href="//mizphses.com" class="flex">開発者ホームページ</a>
+          <a href="//blog.typeshr.ink" target="_blank" class="flex">開発ブログ</a>
         </div>
       </div>
       <p>©2023 mizphses All rights reserved. 書体はデザイナのライセンスに準拠します。</p>
